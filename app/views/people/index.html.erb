@@ -7,13 +7,18 @@
       <th scope="col">Stage</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody data-controller="people">
     <% @people.each do |person| %>
       <tr>
         <%= content_tag :td, person.first_name %>
         <%= content_tag :td, person.last_name %>
         <%= content_tag :td, person.company_name %>
-        <%= content_tag :td, person.stage %>
+        <%= content_tag :td, id: "person-#{person.id}" do %>
+          <%= select_tag "person[#{person.id}][stage]",
+                         stages_options(person),
+                         class: "form-control",
+                        data: {person_id: person.id, action: "change->people#updateStage"} %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,12 @@
+td = $("#person-<%= @person.id %>")
+
+<% if @success %>
+  td.append("<span class='notify text-success'>Updated successfully!</span>")
+<% else %>
+  td.append("<span class='notify text-danger'>Failed to update!</span>")
+  td.find('select').val("<%= @person.stage_was %>")
+<% end %>
+
+setTimeout(function() {
+  td.find('.notify').remove();
+}, 5000);
