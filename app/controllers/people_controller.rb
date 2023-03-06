@@ -2,7 +2,8 @@ class PeopleController < ApplicationController
   before_action :find_person, only: %i[update]
 
   def index
-    @pagy, @people = pagy(Person.includes(:company).all)
+    @q = Person.includes(:company).ransack(params[:q])
+    @pagy, @people = pagy(@q.result)
   end
 
   def update

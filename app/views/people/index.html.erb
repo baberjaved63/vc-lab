@@ -1,17 +1,31 @@
+<%= search_form_for @q do |f| %>
+  <div class="form-group">
+    <%= f.label :email_or_first_name_or_last_name_or_company_name_cont, "Search by email name or company" %>
+    <%= f.search_field :email_or_first_name_or_last_name_or_company_name_cont, class: "form-control" %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
+      <th scope="col">Email</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
+      <th scope="col">Phone number</th>
       <th scope="col">Company</th>
       <th scope="col">Stage</th>
+      <th scope="col">Probability</th>
     </tr>
   </thead>
   <tbody data-controller="people">
     <% @people.each do |person| %>
       <tr>
+        <%= content_tag :td, person.email %>
         <%= content_tag :td, person.first_name %>
         <%= content_tag :td, person.last_name %>
+        <%= content_tag :td, person.phone %>
         <%= content_tag :td, person.company_name %>
         <%= content_tag :td, id: "person-#{person.id}" do %>
           <%= select_tag "person[#{person.id}][stage]",
@@ -19,6 +33,7 @@
                          class: "form-control",
                         data: {person_id: person.id, action: "change->people#updateStage"} %>
         <% end %>
+        <%= content_tag :td, person.probability %>
       </tr>
     <% end %>
   </tbody>

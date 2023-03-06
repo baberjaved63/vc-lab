@@ -75,3 +75,5 @@ end
 gem "csv", "~> 3.2"
 
 gem "pagy", "~> 6.0"
+
+gem "ransack", github: 'activerecord-hackery/ransack'
