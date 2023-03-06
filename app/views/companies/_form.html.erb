@@ -1,0 +1,14 @@
+<%= form_with(model: company) do |form| %>
+  <ul>
+    <% company.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+
+  <%= form.label :name %>
+  <%= form.text_field :name, class: "form-control" %>
+
+  <div>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Companies</h1>
+
+<%= link_to "New company", new_company_path %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <%= content_tag :td, company.name %>
+        <td>
+          <%= link_to "Edit", edit_company_path(company) %> |
+          <%= link_to "Delete", company_path(company), data: {turbo_method: :delete} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bootstrap_nav(@pagy) %>
