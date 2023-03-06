@@ -1,3 +1,7 @@
+<div>
+  <%= link_to "New Person", new_person_path %>
+</div>
+
 <%= search_form_for @q do |f| %>
   <div class="form-group">
     <%= f.label :email_or_first_name_or_last_name_or_company_name_cont, "Search by email name or company" %>
@@ -17,6 +21,7 @@
       <th scope="col">Company</th>
       <th scope="col">Stage</th>
       <th scope="col">Probability</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody data-controller="people">
@@ -34,6 +39,10 @@
                         data: {person_id: person.id, action: "change->people#updateStage"} %>
         <% end %>
         <%= content_tag :td, person.probability %>
+        <td>
+          <%= link_to "Edit", edit_person_path(person) %> |
+          <%= link_to "Delete", person_path(person), data: {turbo_method: :delete} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
