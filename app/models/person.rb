@@ -5,4 +5,8 @@ class Person < ApplicationRecord
   validates :email, uniqueness: true
 
   enum stage: %w[Lead Diligence Contacted Closed Rejected]
+
+  def company_name
+    company&.name
+  end
 end
